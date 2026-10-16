@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Dearest Maitrai ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        script: ['"Dancing Script"', 'cursive'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Quicksand"', 'sans-serif'],
+                    },
+                    colors: {
+                        roseBg: '#ff9a9e',
+                        softPink: '#fecfef',
+                        envelopeYellow: '#f7d774',
+                        envelopeDark: '#eab543',
+                        envelopeFlap: '#df9a2c',
+                        cardCream: '#fffdf9',
+                        deepRed: '#d62828'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            font-family: 'Quicksand', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Subtle ribbed texture like the reference image */
+        .ribbed-bg {
+            background-image: repeating-linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.14) 0px,
+                rgba(255, 255, 255, 0.14) 3px,
+                transparent 3px,
+                transparent 8px
+            );
+        }
+
+        /* Floating Hearts Animation */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(0.7) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.85;
+            }
+            85% {
+                opacity: 0.85;
+            }
+            100% {
+                transform: translateY(-15vh) scale(1.15) rotate(25deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-heart {
+            position: fixed;
+            bottom: -50px;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp linear infinite;
+            color: #d90429;
+            filter: drop-shadow(0 3px 6px rgba(217, 4, 41, 0.25));
+        }
+
+        /* 3D Envelope Styling (Matches Screenshot Reference) */
+        .envelope- stage {
+            perspective: 1200px;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 340px;
+            height: 230px;
+            margin: 90px auto 40px;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @media (min-width: 640px) {
+            .envelope-wrapper {
+                width: 400px;
+                height: 265px;
+                margin: 110px auto 50px;
+            }
+        }
+
+        .envelope-wrapper:hover {
+            transform: translateY(-6px);
+        }
+
+        .envelope-back {
+            position: absolute;
+            inset: 0;
+            background: #e5b343;
+            border-radius: 6px 6px 12px 12px;
+            box-shadow: 0 22px 45px rgba(180, 60, 80, 0.28);
+        }
+
+        /* Striped cream card inside envelope */
+        .envelope-letter {
+            position: absolute;
+            left: 6%;
+            right: 6%;
+            bottom: 10px;
+            height: 92%;
+            background-color: #fffcf7;
+            background-image: repeating-linear-gradient(
+                90deg,
+                #fffcf7 0px,
+                #fffcf7 6px,
+                #f5efe6 6px,
+                #f5efe6 8px
+            );
+            border-radius: 8px;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            border: 1px solid #f0e6d8;
+        }
+
+        .envelope-wrapper.open .envelope-letter {
+            transform: translateY(-105px) rotate(-1deg);
+            z-index: 4;
+        }
+
+        /* Envelope Front Flaps */
+        .envelope-front-left {
+            position: absolute;
+            inset: 0;
+            background: #f6d365;
+            clip-path: polygon(0 0, 52% 56%, 0 100%);
+            z-index: 3;
+            border-radius: 0 0 0 12px;
+        }
+
+        .envelope-front-right {
+            position: absolute;
+            inset: 0;
+            background: #f3ca52;
+            clip-path: polygon(100% 0, 48% 56%, 100% 100%);
+            z-index: 3;
+            border-radius: 0 0 12px 0;
+        }
+
+        .envelope-front-bottom {
+            position: absolute;
+            inset: 0;
+            background: #f8da78;
+            clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+            z-index: 3;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 62%;
+            background: #e5b343;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top;
+            transition: transform 0.55s ease, z-index 0.2s;
+            z-index: 5;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        /* Polaroid Frame & Boundaries */
+        .polaroid-card {
+            background: #ffffff;
+            padding: 18px 18px 28px 18px;
+            border-radius: 22px;
+            box-shadow: 
+                0 20px 50px rgba(185, 28, 28, 0.16),
+                0 0 0 1px rgba(255, 255, 255, 0.9);
+            transform: rotate(-1.5deg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .polaroid-card:hover {
+            transform: rotate(0deg) translateY(-6px) scale(1.01);
+            box-shadow: 0 28px 60px rgba(185, 28, 28, 0.22);
+        }
+
+        .polaroid-tape {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 125px;
+            height: 30px;
+            background: rgba(255, 182, 193, 0.72);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            border-left: 2px dashed rgba(255,255,255,0.6);
+            border-right: 2px dashed rgba(255,255,255,0.6);
+            z-index: 10;
+        }
+
+        .photo-boundary {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 4.3;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 4px solid #fff5f7;
+            box-shadow: inset 0 0 18px rgba(0,0,0,0.12), 0 4px 14px rgba(244, 63, 94, 0.12);
+            background: #fdf2f8;
+        }
+
+        /* Photo Filters */
+        .filter-normal { filter: none; }
+        .filter-warm { filter: contrast(1.04) saturate(1.15) sepia(0.08); }
+        .filter-dreamy { filter: brightness(1.05) contrast(0.98) saturate(1.2) drop-shadow(0 0 8px rgba(255,182,193,0.4)); }
+        .filter-vintage { filter: sepia(0.28) contrast(1.05) brightness(0.98); }
+
+        /* 3D Flip Cards */
+        .flip-card {
+            perspective: 1000px;
+            height: 230px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner,
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 24px;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 15px 35px rgba(225, 29, 72, 0.08);
+        }
+
+        /* Paper Lined Background for Love Letter */
+        .lined-paper {
+            background-color: #fffdfa;
+            background-image: linear-gradient(transparent 95%, #fce7f3 95%);
+            background-size: 100% 2.1rem;
+            line-height: 2.1rem;
+        }
+    </style>
+</head>
+<body class="ribbed-bg text-gray-800 antialiased selection:bg-rose-200 selection:text-rose-900">
+
+    <!-- Floating Background Hearts Container -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-3 z-50 px-4">
+        <nav class="max-w-4xl mx-auto glass-card rounded-full px-5 py-2.5 flex items-center justify-between shadow-lg">
+            <a href="#top" class="font-script text-2xl sm:text-3xl text-rose-600 font-bold flex items-center gap-1.5">
+                Maitrai <span class="text-rose-500 text-xl animate-pulse">❤️</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-700">
+                <a href="#envelope-sec" class="hover:text-rose-600 transition">💌 Envelope</a>
+                <a href="#our-photo" class="hover:text-rose-600 transition">📸 Us Together</a>
+                <a href="#love-note" class="hover:text-rose-600 transition">📜 Note</a>
+                <a href="#why-you" class="hover:text-rose-600 transition">✨ Why You</a>
+                <a href="#coupons" class="hover:text-rose-600 transition">🎟️ Coupons</a>
+                <a href="#question" class="hover:text-rose-600 transition">💍 Question</a>
+            </div>
+
+            <button id="musicBtn" onclick="toggleMelody()" class="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow-md hover:shadow-lg transition flex items-center gap-2">
+                <i id="musicIcon" class="fa-solid fa-music"></i>
+                <span id="musicText">Play Melody</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main id="top" class="relative z-10 max-w-5xl mx-auto px-4 pb-24">
+
+        <!-- SECTION 1: 3D ENVELOPE (EXACT SCREENSHOT VIBE) -->
+        <section id="envelope-sec" class="pt-10 pb-16 text-center scroll-mt-20">
+            <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold text-rose-600 shadow-sm mb-3">
+                <span>✨ Made with all my love, just for you</span>
+            </div>
+            <h1 class="font-serif text-3xl sm:text-5xl font-bold text-rose-950 tracking-tight">
+                Hey Maitrai, You Have Mail!
+            </h1>
+            <p class="text-sm sm:text-base text-rose-800/80 mt-2 max-w-md mx-auto">
+                Tap the envelope below to open your little surprise from Sarvesh 👇
+            </p>
+
+            <!-- 3D Envelope Component -->
+            <div class="envelope-stage">
+                <div id="envelope" class="envelope-wrapper open" onclick="toggleEnvelope()">
+                    <div class="envelope-back"></div>
+
+                    <!-- The Letter Inside (Matches Reference Screenshot) -->
+                    <div class="envelope-letter">
+                        <p class="font-serif text-gray-800 text-base sm:text-lg leading-snug font-medium mt-1">
+                            You are one in a million<br>
+                            feeling, I love you! <span class="text-red-600">❤️</span>
+                        </p>
+
+                        <!-- Cute Bunny & Bear Hugging Illustration (SVG) -->
+                        <div class="mt-3 flex items-center justify-center">
+                            <svg width="125" height="95" viewBox="0 0 140 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Little floating heart above them -->
+                                <path d="M68 18C68 15.5 65.5 13.5 63 15.5C60.5 13.5 58 15.5 58 18C58 21.5 63 24.5 63 24.5C63 24.5 68 21.5 68 18Z" fill="#e63946"/>
+                                
+                                <!-- Cute White Bunny (Left) -->
+                                <!-- Ears -->
+                                <ellipse cx="42" cy="34" rx="5.5" ry="14" transform="rotate(-12 42 34)" fill="#ffffff" stroke="#6d4c41" stroke-width="2"/>
+                                <ellipse cx="42" cy="34" rx="2.8" ry="9" transform="rotate(-12 42 34)" fill="#ffb5a7"/>
+                                <ellipse cx="54" cy="33" rx="5.5" ry="13" transform="rotate(8 54 33)" fill="#ffffff" stroke="#6d4c41" stroke-width="2"/>
+                                <ellipse cx="54" cy="33" rx="2.8" ry="8" transform="rotate(8 54 33)" fill="#ffb5a7"/>
+                                <!-- Bunny Body -->
+                                <ellipse cx="51" cy="78" rx="16" ry="15" fill="#ffffff" stroke="#6d4c41" stroke-width="2"/>
+                                <!-- Bunny Head -->
+                                <circle cx="50" cy="54" r="18" fill="#ffffff" stroke="#6d4c41" stroke-width="2"/>
+                                <!-- Bunny Cheeks -->
+                                <ellipse cx="39" cy="57" rx="3.5" ry="2" fill="#ffadad"/>
+                                <ellipse cx="58" cy="57" rx="3.5" ry="2" fill="#ffadad"/>
+                                <!-- Bunny Eyes & Smile -->
+                                <circle cx="43" cy="53" r="2" fill="#4a3b32"/>
+                                <circle cx="55" cy="53" r="2" fill="#4a3b32"/>
+                                <path d="M47 57Q50 60 53 57" stroke="#6d4c41" stroke-width="1.8" stroke-linecap="round"/>
+
+                                <!-- Cute Brown Bear (Right) -->
+                                <!-- Bear Ears -->
+                                <circle cx="77" cy="38" r="6.5" fill="#b07d56" stroke="#5c3a21" stroke-width="2"/>
+                                <circle cx="77" cy="38" r="3" fill="#d4a373"/>
+                                <circle cx="99" cy="40" r="6.5" fill="#b07d56" stroke="#5c3a21" stroke-width="2"/>
+                                <circle cx="99" cy="40" r="3" fill="#d4a373"/>
+                                <!-- Bear Body -->
+                                <ellipse cx="86" cy="79" rx="17" ry="15" fill="#b07d56" stroke="#5c3a21" stroke-width="2"/>
+                                <!-- Bear Head -->
+                                <circle cx="87" cy="56" r="19" fill="#b07d56" stroke="#5c3a21" stroke-width="2"/>
+                                <!-- Bear Snout -->
+                                <ellipse cx="85" cy="59" rx="6.5" ry="5" fill="#faedcd"/>
+                                <circle cx="85" cy="57" r="2.2" fill="#5c3a21"/>
+                                <!-- Bear Cheeks -->
+                                <ellipse cx="74" cy="59" rx="3.5" ry="2.2" fill="#e07a5f"/>
+                                <ellipse cx="96" cy="60" rx="3.5" ry="2.2" fill="#e07a5f"/>
+                                <!-- Bear Eyes -->
+                                <circle cx="78" cy="53" r="2.2" fill="#3d2616"/>
+                                <circle cx="93" cy="54" r="2.2" fill="#3d2616"/>
+
+                                <!-- Hugging Paws in Center -->
+                                <ellipse cx="64" cy="73" rx="7" ry="4.5" transform="rotate(15 64 73)" fill="#ffffff" stroke="#6d4c41" stroke-width="2"/>
+                                <ellipse cx="73" cy="74" rx="7" ry="4.5" transform="rotate(-15 73 74)" fill="#b07d56" stroke="#5c3a21" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Envelope Flaps -->
+                    <div class="envelope-front-left"></div>
+                    <div class="envelope-front-right"></div>
+                    <div class="envelope-front-bottom"></div>
+                    <div class="envelope-flap"></div>
+                </div>
+            </div>
+
+            <div class="mt-4 flex justify-center gap-3">
+                <button onclick="toggleEnvelope()" class="bg-white/90 hover:bg-white text-rose-600 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-envelope-open-text"></i> Open / Close Envelope
+                </button>
+                <a href="#our-photo" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-md transition flex items-center gap-2">
+                    Scroll Down <i class="fa-solid fa-arrow-down"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- SECTION 2: OUR PERMANENT PHOTO FRAME (our-photo.jpeg) -->
+        <section id="our-photo" class="py-14 scroll-mt-20">
+            <div class="text-center mb-10">
+                <span class="text-xs font-bold uppercase tracking-widest text-rose-600 bg-rose-100/90 px-3.5 py-1 rounded-full">
+                    My Favorite View
+                </span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-rose-950 mt-2">
+                    You & Me, Always 📸
+                </h2>
+                <p class="text-sm sm:text-base text-rose-900/75 mt-1 max-w-lg mx-auto">
+                    Out of all the places I could be, right next to you will always be my absolute favorite spot.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Left Column: Polaroid Frame with our-photo.jpeg permanently set -->
+                <div class="lg:col-span-6 flex justify-center">
+                    <div class="polaroid-card w-full max-w-sm">
+                        <div class="polaroid-tape"></div>
+
+                        <!-- Heart Badge on Corner -->
+                        <button onclick="burstHearts(event)" title="Tap for extra love!" class="absolute -top-3 -right-3 z-20 w-10 h-10 rounded-full bg-rose-500 hover:bg-rose-600 text-white shadow-lg flex items-center justify-center transition transform hover:scale-110">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+
+                        <!-- Permanent Image with Beautiful Boundaries -->
+                        <div class="photo-boundary group">
+                            <img 
+                                id="coupleImg" 
+                                src="our-photo.jpeg" 
+                                alt="Sarvesh and Maitrai" 
+                                class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter-normal"
+                            />
+                        </div>
+
+                        <!-- Polaroid Caption -->
+                        <div class="mt-4 text-center px-2">
+                            <p id="polaroid-caption" contenteditable="true" spellcheck="false" class="font-script text-2xl sm:text-3xl text-gray-800 font-bold focus:outline-none">
+                                Sarvesh & Maitrai ❤️
+                            </p>
+                            <span class="text-xs text-rose-400 font-medium block mt-0.5">
+                                Forever my favorite person in every frame ✨
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Warm, Lovable & Natural English Side Card -->
+                <div class="lg:col-span-6 space-y-5">
+                    <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+                        <div class="flex items-center justify-between flex-wrap gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-xl shadow-md">
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-serif text-xl font-bold text-rose-950">Us In A Frame</h3>
+                                    <p class="text-xs text-gray-500">Every memory with you feels like magic</p>
+                                </div>
+                            </div>
+
+                            <!-- Cute Filter Toggle Button -->
+                            <button onclick="cyclePhotoFilter()" id="filterBtn" class="bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold px-4 py-2 rounded-xl shadow-sm transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span id="filterLabel">Filter: Original</span>
+                            </button>
+                        </div>
+
+                        <!-- Heartfelt Quote in Natural English -->
+                        <div class="bg-white/80 border-l-4 border-rose-500 rounded-2xl p-5 shadow-sm">
+                            <p class="font-serif italic text-gray-700 text-sm sm:text-base leading-relaxed">
+                                "I could look at a thousand different smiles in this world, Maitrai, and my eyes would still only ever search for yours. Being with you makes even the simplest moments feel so special."
+                            </p>
+                        </div>
+
+                        <!-- 4 Cute Relationship Highlights -->
+                        <div class="grid grid-cols-2 gap-3.5 pt-1">
+                            <div class="bg-white/80 rounded-2xl p-3.5 flex items-center gap-3 shadow-sm border border-rose-100/80">
+                                <span class="text-2xl">👑</span>
+                                <div>
+                                    <p class="text-[11px] text-gray-400 font-semibold uppercase">My Favorite Person</p>
+                                    <p class="text-sm font-bold text-gray-800">Maitrai, Always</p>
+                                </div>
+                            </div>
+                            <div class="bg-white/80 rounded-2xl p-3.5 flex items-center gap-3 shadow-sm border border-rose-100/80">
+                                <span class="text-2xl">🔒</span>
+                                <div>
+                                    <p class="text-[11px] text-gray-400 font-semibold uppercase">Us Status</p>
+                                    <p class="text-sm font-bold text-gray-800">Locked In Forever</p>
+                                </div>
+                            </div>
+                            <div class="bg-white/80 rounded-2xl p-3.5 flex items-center gap-3 shadow-sm border border-rose-100/80">
+                                <span class="text-2xl">😊</span>
+                                <div>
+                                    <p class="text-[11px] text-gray-400 font-semibold uppercase">Prettiest Smile</p>
+                                    <p class="text-sm font-bold text-gray-800">1000% Yours</p>
+                                </div>
+                            </div>
+                            <div class="bg-white/80 rounded-2xl p-3.5 flex items-center gap-3 shadow-sm border border-rose-100/80">
+                                <span class="text-2xl">🏡</span>
+                                <div>
+                                    <p class="text-[11px] text-gray-400 font-semibold uppercase">My Safe Place</p>
+                                    <p class="text-sm font-bold text-gray-800">Right Beside You</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: HEARTFELT LETTER FROM SARVESH TO MAITRAI -->
+        <section id="love-note" class="py-14 scroll-mt-20">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-rose-600 bg-rose-100/90 px-3.5 py-1 rounded-full">
+                        Straight From My Heart
+                    </span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-rose-950 mt-2">
+                        A Little Note For You 📜
+                    </h2>
+                </div>
+
+                <div class="lined-paper rounded-3xl p-7 sm:p-11 shadow-xl border border-rose-100 relative">
+                    <div class="flex items-center justify-between border-b border-rose-100 pb-4 mb-6">
+                        <div>
+                            <p class="font-script text-3xl text-rose-600 font-bold">Dearest Maitrai,</p>
+                        </div>
+                        <span class="text-xs font-semibold text-rose-400 bg-rose-50 px-3 py-1 rounded-full">
+                            From Sarvesh ❤️
+                        </span>
+                    </div>
+
+                    <div contenteditable="true" spellcheck="false" class="space-y-4 text-gray-700 text-base sm:text-lg font-medium focus:outline-none">
+                        <p>
+                            I wanted to make something a little different for you—something you can open whenever you want a reminder of just how much you mean to me.
+                        </p>
+                        <p>
+                            Before you came into my life, I didn't realize how effortless and comforting love could feel. Whether we're talking for hours about the most random things, laughing at our own silly jokes, or just spending quiet moments together, every second with you is the best part of my day.
+                        </p>
+                        <p>
+                            You have the kindest heart, the prettiest smile, and this amazing way of making everything around you brighter. Thank you for being so patient, so loving, and for simply being you. I'm really lucky to call you mine.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-4 border-t border-rose-100 flex items-center justify-between">
+                        <span class="text-xs text-gray-400">Forever & always on your team</span>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-500">With all my love,</p>
+                            <p class="font-script text-3xl text-rose-600 font-bold">Sarvesh ❤️</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: 6 REASONS WHY I ADORE YOU (FLIP CARDS) -->
+        <section id="why-you" class="py-14 scroll-mt-20">
+            <div class="text-center mb-10">
+                <span class="text-xs font-bold uppercase tracking-widest text-rose-600 bg-rose-100/90 px-3.5 py-1 rounded-full">
+                    Tap Or Hover Any Card
+                </span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-rose-950 mt-2">
+                    Little Things I Love About You ✨
+                </h2>
+                <p class="text-sm sm:text-base text-rose-900/75 mt-1">
+                    There are a million reasons, Maitrai, but here are six that make me fall for you every single day.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="flip-card cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-4xl mb-3">🌸</span>
+                            <h3 class="font-serif text-xl font-bold text-rose-950"> #1 Your Smile</h3>
+                            <p class="text-xs text-rose-500 font-semibold mt-2">Tap to flip ↻</p>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-br from-rose-500 to-pink-500 text-white p-6 flex flex-col items-center justify-center text-center shadow-xl">
+                            <p class="text-sm sm:text-base font-medium leading-relaxed">
+                                "No matter how my day has been, seeing you smile instantly fixes my mood in a second."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flip-card cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-4xl mb-3">🎧</span>
+                            <h3 class="font-serif text-xl font-bold text-rose-950">#2 Our Conversations</h3>
+                            <p class="text-xs text-rose-500 font-semibold mt-2">Tap to flip ↻</p>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-br from-rose-500 to-pink-500 text-white p-6 flex flex-col items-center justify-center text-center shadow-xl">
+                            <p class="text-sm sm:text-base font-medium leading-relaxed">
+                                "You make even the most ordinary moments feel special,Somehow, you’ve become my favourite part of every day."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="flip-card cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-4xl mb-3">🤍</span>
+                            <h3 class="font-serif text-xl font-bold text-rose-950">#3 How Caring You Are</h3>
+                            <p class="text-xs text-rose-500 font-semibold mt-2">Tap to flip ↻</p>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-br from-rose-500 to-pink-500 text-white p-6 flex flex-col items-center justify-center text-center shadow-xl">
+                            <p class="text-sm sm:text-base font-medium leading-relaxed">
+                                "The way you care so genuinely about the people you love makes me admire you so much."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="flip-card cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-4xl mb-3">✨</span>
+                            <h3 class="font-serif text-xl font-bold text-rose-950">#4 Your Cute Expressions</h3>
+                            <p class="text-xs text-rose-500 font-semibold mt-2">Tap to flip ↻</p>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-br from-rose-500 to-pink-500 text-white p-6 flex flex-col items-center justify-center text-center shadow-xl">
+                            <p class="text-sm sm:text-base font-medium leading-relaxed">
+                                "Even when you're pretending to be annoyed with me, you look so adorable that I just end up smiling."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="flip-card cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-4xl mb-3">🌙</span>
+                            <h3 class="font-serif text-xl font-bold text-rose-950">#5 My Peace & Comfort</h3>
+                            <p class="text-xs text-rose-500 font-semibold mt-2">Tap to flip ↻</p>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-br from-rose-500 to-pink-500 text-white p-6 flex flex-col items-center justify-center text-center shadow-xl">
+                            <p class="text-sm sm:text-base font-medium leading-relaxed">
+                                "With you, I never have to pretend. Being around you feels like the calmest, safest place in the world."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="flip-card cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-4xl mb-3">♾️</span>
+                            <h3 class="font-serif text-xl font-bold text-rose-950">#6 Simply Being You</h3>
+                            <p class="text-xs text-rose-500 font-semibold mt-2">Tap to flip ↻</p>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-br from-rose-500 to-pink-500 text-white p-6 flex flex-col items-center justify-center text-center shadow-xl">
+                            <p class="text-sm sm:text-base font-medium leading-relaxed">
+                                "You make me want to be a better person every day. Loving you is honestly the easiest thing I've ever done."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: LOVE COUPONS FOR MAITRAI -->
+        <section id="coupons" class="py-14 scroll-mt-20">
+            <div class="text-center mb-10">
+                <span class="text-xs font-bold uppercase tracking-widest text-rose-600 bg-rose-100/90 px-3.5 py-1 rounded-full">
+                    Lifetime Validity • Issued by Sarvesh
+                </span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-rose-950 mt-2">
+                    Maitrai's Exclusive Love Coupons 🎟️
+                </h2>
+                <p class="text-sm sm:text-base text-rose-900/75 mt-1">
+                    Tap any coupon to redeem it—no expiration date, ever!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Coupon 1 -->
+                <div onclick="redeemCoupon(this)" class="glass-card rounded-3xl p-5 flex items-center justify-between gap-4 border-2 border-dashed border-rose-300 cursor-pointer hover:border-rose-500 transition group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-100 text-3xl flex items-center justify-center shrink-0">
+                            🍕
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-base sm:text-lg">Food & Dessert Date</h4>
+                            <p class="text-xs sm:text-sm text-gray-600">Your favorite food + ice cream, completely on me whenever you want!</p>
+                        </div>
+                    </div>
+                    <span class="coupon-badge bg-rose-500 group-hover:bg-rose-600 text-white text-xs font-bold px-4 py-2 rounded-full shrink-0 transition">
+                        Redeem
+                    </span>
+                </div>
+
+                <!-- Coupon 2 -->
+                <div onclick="redeemCoupon(this)" class="glass-card rounded-3xl p-5 flex items-center justify-between gap-4 border-2 border-dashed border-rose-300 cursor-pointer hover:border-rose-500 transition group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-100 text-3xl flex items-center justify-center shrink-0">
+                            🤗
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-base sm:text-lg">Unlimited Tight Hugs</h4>
+                            <p class="text-xs sm:text-sm text-gray-600">Redeemable anytime you need extra warmth and comfort.</p>
+                        </div>
+                    </div>
+                    <span class="coupon-badge bg-rose-500 group-hover:bg-rose-600 text-white text-xs font-bold px-4 py-2 rounded-full shrink-0 transition">
+                        Redeem
+                    </span>
+                </div>
+
+                <!-- Coupon 3 -->
+                <div onclick="redeemCoupon(this)" class="glass-card rounded-3xl p-5 flex items-center justify-between gap-4 border-2 border-dashed border-rose-300 cursor-pointer hover:border-rose-500 transition group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-100 text-3xl flex items-center justify-center shrink-0">
+                            👑
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-base sm:text-lg">You Win The Argument Pass</h4>
+                            <p class="text-xs sm:text-sm text-gray-600">Instant victory in any silly disagreement—no questions asked!</p>
+                        </div>
+                    </div>
+                    <span class="coupon-badge bg-rose-500 group-hover:bg-rose-600 text-white text-xs font-bold px-4 py-2 rounded-full shrink-0 transition">
+                        Redeem
+                    </span>
+                </div>
+
+                <!-- Coupon 4 -->
+                <div onclick="redeemCoupon(this)" class="glass-card rounded-3xl p-5 flex items-center justify-between gap-4 border-2 border-dashed border-rose-300 cursor-pointer hover:border-rose-500 transition group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-100 text-3xl flex items-center justify-center shrink-0">
+                            🌙
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-base sm:text-lg">Late Night Walk & Talk</h4>
+                            <p class="text-xs sm:text-sm text-gray-600">Just the two of us, good music, and endless conversations.</p>
+                        </div>
+                    </div>
+                    <span class="coupon-badge bg-rose-500 group-hover:bg-rose-600 text-white text-xs font-bold px-4 py-2 rounded-full shrink-0 transition">
+                        Redeem
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: CUTE INTERACTIVE QUESTION -->
+        <section id="question" class="py-14 scroll-mt-20">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 text-center max-w-2xl mx-auto relative overflow-hidden">
+                <div id="questionBox">
+                    <span class="text-5xl block mb-3">🌷</span>
+                    <h2 class="font-serif text-2xl sm:text-4xl font-bold text-rose-950">
+                        chloo ANS kroo app...
+                    </h2>
+                    <p class="text-gray-700 text-sm sm:text-base mt-2 max-w-md mx-auto">
+                        Will you keep smiling like this and stay by my side forever?
+                    </p>
+
+                    <div class="mt-8 flex items-center justify-center gap-4 relative min-h-[60px]">
+                        <button onclick="sayYes()" class="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition text-base">
+                            Yes, Always! ❤️
+                        </button>
+
+                        <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-6 py-3 rounded-full shadow transition text-sm">
+                            No 🙈
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hidden Celebration State -->
+                <div id="yesCelebration" class="hidden py-4">
+                    <span class="text-6xl block mb-3 animate-bounce">🥰🎉💖</span>
+                    <h3 class="font-script text-4xl sm:text-5xl text-rose-600 font-bold">
+                        Yay! I Love You So Much, Maitrai!
+                    </h3>
+                    <p class="text-gray-700 text-base sm:text-lg mt-3 max-w-md mx-auto">
+                        Best decision ever! Come get your tightest hug from Sarvesh right now. ❤️
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center pb-10 text-rose-900/70 text-xs sm:text-sm font-medium relative z-10">
+        Made with ❤️ by <span class="font-bold text-rose-700">Sarvesh</span> exclusively for <span class="font-bold text-rose-700">Maitrai</span>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // 1. Create Floating Background Hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartSymbols = ['❤️', '💖', '💕', '💗', '💓'];
+            for (let i = 0; i < 18; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 16 + 14) + 'px';
+                heart.style.animationDuration = (Math.random() * 7 + 8) + 's';
+                heart.style.animationDelay = (Math.random() * 6) + 's';
+                container.appendChild(heart);
+            }
+        }
+        createFloatingHearts();
+
+        // 2. Toggle 3D Envelope Open / Close
+        function toggleEnvelope() {
+            const env = document.getElementById('envelope');
+            env.classList.toggle('open');
+        }
+
+        // 3. Cycle Photo Filters on our-photo.jpeg
+        const filters = [
+            { class: 'filter-normal', name: 'Original' },
+            { class: 'filter-warm', name: 'Warm Glow' },
+            { class: 'filter-dreamy', name: 'Soft Dreamy' },
+            { class: 'filter-vintage', name: 'Vintage Love' }
+        ];
+        let currentFilterIndex = 0;
+
+        function cyclePhotoFilter() {
+            const img = document.getElementById('coupleImg');
+            const label = document.getElementById('filterLabel');
+            img.classList.remove(filters[currentFilterIndex].class);
+            currentFilterIndex = (currentFilterIndex + 1) % filters.length;
+            img.classList.add(filters[currentFilterIndex].class);
+            label.innerText = 'Filter: ' + filters[currentFilterIndex].name;
+        }
+
+        // 4. Burst Hearts on Polaroid Heart Button Click
+        function burstHearts(e) {
+            for (let i = 0; i < 12; i++) {
+                const span = document.createElement('span');
+                span.innerText = '❤️';
+                span.style.position = 'fixed';
+                span.style.left = e.clientX + 'px';
+                span.style.top = e.clientY + 'px';
+                span.style.pointerEvents = 'none';
+                span.style.zIndex = 9999;
+                span.style.fontSize = '20px';
+                span.style.transition = 'all 0.9s ease-out';
+                document.body.appendChild(span);
+
+                const angle = (Math.PI * 2 * i) / 12;
+                const distance = 60 + Math.random() * 40;
+                requestAnimationFrame(() => {
+                    span.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance - 30}px) scale(0.3)`;
+                    span.style.opacity = '0';
+                });
+                setTimeout(() => span.remove(), 900);
+            }
+        }
+
+        // 5. Redeem Coupon Interaction
+        function redeemCoupon(card) {
+            const badge = card.querySelector('.coupon-badge');
+            if (badge.innerText === 'Redeem') {
+                badge.innerText = 'Claimed ❤️';
+                badge.classList.remove('bg-rose-500');
+                badge.classList.add('bg-emerald-500');
+                card.classList.add('bg-rose-50/90');
+            } else {
+                badge.innerText = 'Redeem';
+                badge.classList.remove('bg-emerald-500');
+                badge.classList.add('bg-rose-500');
+                card.classList.remove('bg-rose-50/90');
+            }
+        }
+
+        // 6. Runaway "No" Button & "Yes" Celebration
+        function moveNoButton() {
+            const btn = document.getElementById('noBtn');
+            const randomX = (Math.random() - 0.5) * 220;
+            const randomY = (Math.random() - 0.5) * 120;
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        function sayYes() {
+            document.getElementById('questionBox').classList.add('hidden');
+            document.getElementById('yesCelebration').classList.remove('hidden');
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    burstHearts({
+                        clientX: window.innerWidth / 2 + (Math.random() - 0.5) * 300,
+                        clientY: window.innerHeight / 2 + (Math.random() - 0.5) * 200
+                    });
+                }, i * 60);
+            }
+        }
+
+        // 7. Gentle Music Box Melody (Web Audio API - No external MP3 needed)
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyInterval = null;
+
+        const notes = [523.25, 659.25, 783.99, 659.25, 880.00, 783.99, 659.25, 587.33];
+        let noteIdx = 0;
+
+        function playTone(freq) {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+            gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.1);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 1.15);
+        }
+
+        function toggleMelody() {
+            const btnText = document.getElementById('musicText');
+            const icon = document.getElementById('musicIcon');
+            if (!isPlaying) {
+                isPlaying = true;
+                btnText.innerText = 'Pause Melody';
+                icon.classList.add('fa-spin');
+                playTone(notes[noteIdx]);
+                melodyInterval = setInterval(() => {
+                    noteIdx = (noteIdx + 1) % notes.length;
+                    playTone(notes[noteIdx]);
+                }, 650);
+            } else {
+                isPlaying = false;
+                btnText.innerText = 'Play Melody';
+                icon.classList.remove('fa-spin');
+                clearInterval(melodyInterval);
+            }
+        }
+    </script>
+</body>
+</html>
